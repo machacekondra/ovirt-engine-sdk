@@ -1,0 +1,7 @@
+language: java
+
+os:
+  - osx
+
+install:
+  - pip install ovirt-engine-sdk-python
