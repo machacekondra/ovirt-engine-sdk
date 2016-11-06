@@ -1180,7 +1180,7 @@ services provided by the API.</p>
             
   <div class="item">
     <div class="name def" id="ovirtsdk4.Connection.__init__">
-    <p>def <span class="ident">__init__</span>(</p><p>self, url=None, username=None, password=None, token=None, insecure=False, ca_file=None, debug=False, log=None, kerberos=False, timeout=0, compress=True, sso_url=None, sso_revoke_url=None, sso_token_name=&#39;access_token&#39;)</p>
+    <p>def <span class="ident">__init__</span>(</p><p>self, url=None, username=None, password=None, token=None, insecure=False, ca_file=None, debug=False, log=None, kerberos=False, timeout=0, compress=False, sso_url=None, sso_revoke_url=None, sso_token_name=&#39;access_token&#39;)</p>
     </div>
     
 
@@ -1253,11 +1253,9 @@ will be raised.</p>
 <dt class="hdlist1"><code>compress</code></dt>
 <dd>
 <p>A boolean flag indicating if the SDK should ask
-the server to send compressed responses. The default is <code>True</code>.
+the server to send compressed responses. The default is <code>False</code>.
 Note that this is a hint for the server, and that it may return
-uncompressed data even when this parameter is set to <code>True</code>.
-Note that compression will be disabled if user pass <code>debug</code>
-parameter set to <code>true</code>, so the debug messages are in plain text.</p>
+uncompressed data even when this parameter is set to <code>True</code>.</p>
 </dd>
 <dt class="hdlist1"><code>sso_url</code></dt>
 <dd>
