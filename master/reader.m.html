@@ -3,7 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-    <title>ovirtsdk4.xml API documentation</title>
+    <title>ovirtsdk4.reader API documentation</title>
     <meta name="description" content="" />
 
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
@@ -1054,17 +1054,52 @@ table {
         </div>
     <h1>Index</h1>
     <ul id="index">
+    <li class="set"><h3><a href="#header-variables">Module variables</a></h3>
+      
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ_OFFSET_RE">TZ_OFFSET_RE</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ_USEC_RE">TZ_USEC_RE</a></li>
+  </ul>
+
+    </li>
 
 
     <li class="set"><h3><a href="#header-classes">Classes</a></h3>
       <ul>
         <li class="mono">
-        <span class="class_name"><a href="#ovirtsdk4.xml.XmlReader">XmlReader</a></span>
+        <span class="class_name"><a href="#ovirtsdk4.reader.Reader">Reader</a></span>
         
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.parse_boolean">parse_boolean</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.parse_date">parse_date</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.parse_decimal">parse_decimal</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.parse_integer">parse_integer</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_boolean">read_boolean</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_booleans">read_booleans</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_date">read_date</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_dates">read_dates</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_decimal">read_decimal</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_decimals">read_decimals</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_integer">read_integer</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_integers">read_integers</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_string">read_string</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.read_strings">read_strings</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.Reader.__init__">__init__</a></li>
+  </ul>
+
         </li>
         <li class="mono">
-        <span class="class_name"><a href="#ovirtsdk4.xml.XmlWriter">XmlWriter</a></span>
+        <span class="class_name"><a href="#ovirtsdk4.reader.TZ">TZ</a></span>
         
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ.__init__">__init__</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ.dst">dst</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ.tzname">tzname</a></li>
+    <li class="mono"><a href="#ovirtsdk4.reader.TZ.utcoffset">utcoffset</a></li>
+  </ul>
+
         </li>
       </ul>
     </li>
@@ -1080,21 +1115,35 @@ table {
 
 
   <header id="section-intro">
-  <h1 class="title"><span class="name">ovirtsdk4.xml</span> module</h1>
+  <h1 class="title"><span class="name">ovirtsdk4.reader</span> module</h1>
   
   </header>
 
   <section id="section-items">
+    <h2 class="section-title" id="header-variables">Module variables</h2>
+      <div class="item">
+      <p id="ovirtsdk4.reader.TZ_OFFSET_RE" class="name">var <span class="ident">TZ_OFFSET_RE</span></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p id="ovirtsdk4.reader.TZ_USEC_RE" class="name">var <span class="ident">TZ_USEC_RE</span></p>
+      
+  
+
+      </div>
 
 
     <h2 class="section-title" id="header-classes">Classes</h2>
       
       <div class="item">
-      <p id="ovirtsdk4.xml.XmlReader" class="name">class <span class="ident">XmlReader</span></p>
+      <p id="ovirtsdk4.reader.Reader" class="name">class <span class="ident">Reader</span></p>
       
   
     <div class="desc"><div class="paragraph">
-<p>This is an utility class used to read XML documents using an streaming approach. It is intended for use by other components of the SDK. Refrain from using it directly, as backwards compatibility isn&#8217;t guaranteed.</p>
+<p>This is the base class for all the readers of the SDK. It contains
+the utility methods used by all of them.</p>
 </div>
 </div>
 
@@ -1102,18 +1151,267 @@ table {
       <div class="class">
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
-          <li><a href="#ovirtsdk4.xml.XmlReader">XmlReader</a></li>
+          <li><a href="#ovirtsdk4.reader.Reader">Reader</a></li>
           <li>__builtin__.object</li>
           </ul>
+          <h3>Static methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.parse_boolean">
+    <p>def <span class="ident">parse_boolean</span>(</p><p>text)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Converts the given text to a boolean value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.parse_date">
+    <p>def <span class="ident">parse_date</span>(</p><p>text)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Converts the given text to a date value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.parse_decimal">
+    <p>def <span class="ident">parse_decimal</span>(</p><p>text)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Converts the given text to a decimal value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.parse_integer">
+    <p>def <span class="ident">parse_integer</span>(</p><p>text)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Converts the given text to an integer value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_boolean">
+    <p>def <span class="ident">read_boolean</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a boolean value, assuming that the cursor is positioned at the
+start element that contains the value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_booleans">
+    <p>def <span class="ident">read_booleans</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a list of boolean values, assuming that the cursor is positioned
+at the start element of the element that contains the first value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_date">
+    <p>def <span class="ident">read_date</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a date value, assuming that the cursor is positioned at the
+start element that contains the value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_dates">
+    <p>def <span class="ident">read_dates</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a list of date values, assuming that the cursor is positioned
+at the start element of the element that contains the first value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_decimal">
+    <p>def <span class="ident">read_decimal</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a decimal value, assuming that the cursor is positioned at the
+start element that contains the value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_decimals">
+    <p>def <span class="ident">read_decimals</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a list of decimal values, assuming that the cursor is positioned
+at the start element of the element that contains the first value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_integer">
+    <p>def <span class="ident">read_integer</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads an integer value, assuming that the cursor is positioned at the
+start element that contains the value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_integers">
+    <p>def <span class="ident">read_integers</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a list of integer values, assuming that the cursor is positioned
+at the start element of the element that contains the first value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_string">
+    <p>def <span class="ident">read_string</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a string value, assuming that the cursor is positioned at the
+start element that contains the value.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.read_strings">
+    <p>def <span class="ident">read_strings</span>(</p><p>reader)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Reads a list of string values, assuming that the cursor is positioned
+at the start element of the element that contains the first value.</p>
+</div>
+</div>
+
+  </div>
+  
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.Reader.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
       </div>
       </div>
       
       <div class="item">
-      <p id="ovirtsdk4.xml.XmlWriter" class="name">class <span class="ident">XmlWriter</span></p>
+      <p id="ovirtsdk4.reader.TZ" class="name">class <span class="ident">TZ</span></p>
       
   
     <div class="desc"><div class="paragraph">
-<p>This is an utility class used to generate XML documents using an streaming approach. It is intended for use by other components of the SDK. Refrain from using it directly, as backwards compatibility isn&#8217;t guaranteed.</p>
+<p>This is a simple implementation of the <code>tzinfo</code> class, that contains a
+fixed offset.</p>
 </div>
 </div>
 
@@ -1121,9 +1419,59 @@ table {
       <div class="class">
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
-          <li><a href="#ovirtsdk4.xml.XmlWriter">XmlWriter</a></li>
+          <li><a href="#ovirtsdk4.reader.TZ">TZ</a></li>
+          <li>datetime.tzinfo</li>
           <li>__builtin__.object</li>
           </ul>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.TZ.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, minutes, name)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.TZ.dst">
+    <p>def <span class="ident">dst</span>(</p><p>self, date_time)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.TZ.tzname">
+    <p>def <span class="ident">tzname</span>(</p><p>self, date_time)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.reader.TZ.utcoffset">
+    <p>def <span class="ident">utcoffset</span>(</p><p>self, date_time)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
       </div>
       </div>
 

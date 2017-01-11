@@ -3,7 +3,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 
-    <title>ovirtsdk4.xml API documentation</title>
+    <title>ovirtsdk4 API documentation</title>
     <meta name="description" content="" />
 
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300' rel='stylesheet' type='text/css'>
@@ -1059,16 +1059,70 @@ table {
     <li class="set"><h3><a href="#header-classes">Classes</a></h3>
       <ul>
         <li class="mono">
-        <span class="class_name"><a href="#ovirtsdk4.xml.XmlReader">XmlReader</a></span>
+        <span class="class_name"><a href="#ovirtsdk4.Connection">Connection</a></span>
+        
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.Connection.__init__">__init__</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.authenticate">authenticate</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.close">close</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.follow_link">follow_link</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.is_link">is_link</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.send">send</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.service">service</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.system_service">system_service</a></li>
+    <li class="mono"><a href="#ovirtsdk4.Connection.test">test</a></li>
+  </ul>
+
+        </li>
+        <li class="mono">
+        <span class="class_name"><a href="#ovirtsdk4.ConnectionBuilder">ConnectionBuilder</a></span>
+        
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.ConnectionBuilder.__init__">__init__</a></li>
+    <li class="mono"><a href="#ovirtsdk4.ConnectionBuilder.build">build</a></li>
+  </ul>
+
+        </li>
+        <li class="mono">
+        <span class="class_name"><a href="#ovirtsdk4.Error">Error</a></span>
         
         </li>
         <li class="mono">
-        <span class="class_name"><a href="#ovirtsdk4.xml.XmlWriter">XmlWriter</a></span>
+        <span class="class_name"><a href="#ovirtsdk4.List">List</a></span>
         
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.List.__init__">__init__</a></li>
+  </ul>
+
+        </li>
+        <li class="mono">
+        <span class="class_name"><a href="#ovirtsdk4.Struct">Struct</a></span>
+        
+          
+  <ul>
+    <li class="mono"><a href="#ovirtsdk4.Struct.__init__">__init__</a></li>
+  </ul>
+
         </li>
       </ul>
     </li>
 
+    <li class="set"><h3><a href="#header-submodules">Sub-modules</a></h3>
+      <ul>
+        <li class="mono"><a href="http.m.html">ovirtsdk4.http</a></li>
+        <li class="mono"><a href="reader.m.html">ovirtsdk4.reader</a></li>
+        <li class="mono"><a href="readers.m.html">ovirtsdk4.readers</a></li>
+        <li class="mono"><a href="service.m.html">ovirtsdk4.service</a></li>
+        <li class="mono"><a href="services.m.html">ovirtsdk4.services</a></li>
+        <li class="mono"><a href="types.m.html">ovirtsdk4.types</a></li>
+        <li class="mono"><a href="version.m.html">ovirtsdk4.version</a></li>
+        <li class="mono"><a href="writer.m.html">ovirtsdk4.writer</a></li>
+        <li class="mono"><a href="writers.m.html">ovirtsdk4.writers</a></li>
+      </ul>
+    </li>
     </ul>
   </div>
 
@@ -1080,7 +1134,7 @@ table {
 
 
   <header id="section-intro">
-  <h1 class="title"><span class="name">ovirtsdk4.xml</span> module</h1>
+  <h1 class="title"><span class="name">ovirtsdk4</span> module</h1>
   
   </header>
 
@@ -1090,11 +1144,14 @@ table {
     <h2 class="section-title" id="header-classes">Classes</h2>
       
       <div class="item">
-      <p id="ovirtsdk4.xml.XmlReader" class="name">class <span class="ident">XmlReader</span></p>
+      <p id="ovirtsdk4.Connection" class="name">class <span class="ident">Connection</span></p>
       
   
     <div class="desc"><div class="paragraph">
-<p>This is an utility class used to read XML documents using an streaming approach. It is intended for use by other components of the SDK. Refrain from using it directly, as backwards compatibility isn&#8217;t guaranteed.</p>
+<p>This class is responsible for managing an HTTP connection to the engine
+server. It is intended as the entry point for the SDK, and it provides
+access to the <code>system</code> service and, from there, to the rest of the
+services provided by the API.</p>
 </div>
 </div>
 
@@ -1102,18 +1159,337 @@ table {
       <div class="class">
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
-          <li><a href="#ovirtsdk4.xml.XmlReader">XmlReader</a></li>
+          <li><a href="#ovirtsdk4.Connection">Connection</a></li>
           <li>__builtin__.object</li>
           </ul>
+          <h3>Instance variables</h3>
+            <div class="item">
+            <p id="ovirtsdk4.Connection.url" class="name">var <span class="ident">url</span></p>
+            
+
+            
+  
+    <div class="desc"><div class="paragraph">
+<p>Returns a string containing the base URL used by this connection.</p>
+</div>
+</div>
+
+            </div>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, url=None, username=None, password=None, token=None, insecure=False, ca_file=None, debug=False, log=None, kerberos=False, timeout=0, compress=False, sso_url=None, sso_revoke_url=None, sso_token_name=&#39;access_token&#39;)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Creates a new connection to the API server.</p>
+</div>
+<div class="paragraph">
+<p>This method supports the following parameters:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>url</code></dt>
+<dd>
+<p>A string containing the base URL of the server, usually
+something like <code><a href="https://server.example.com/ovirt-engine/api" class="bare">https://server.example.com/ovirt-engine/api</a></code>.</p>
+</dd>
+<dt class="hdlist1"><code>username</code></dt>
+<dd>
+<p>The name of the user, something like <code>admin@internal</code>.</p>
+</dd>
+<dt class="hdlist1"><code>password</code></dt>
+<dd>
+<p>The name password of the user.</p>
+</dd>
+<dt class="hdlist1"><code>token</code></dt>
+<dd>
+<p>: The token to be used to access API. Optionally, user can
+use token, instead of username and password to access API. If user
+don&#8217;t specify <code>token</code> parameter, SDK will automatically create one.</p>
+</dd>
+<dt class="hdlist1"><code>insecure</code></dt>
+<dd>
+<p>A boolean flag that indicates if the server TLS
+certificate and host name should be checked.</p>
+</dd>
+<dt class="hdlist1"><code>ca_file</code></dt>
+<dd>
+<p>A PEM file containing the trusted CA certificates. The
+certificate presented by the server will be verified using these CA
+certificates. If <code>ca_file</code> parameter is not set, system wide
+CA certificate store is used.</p>
+</dd>
+<dt class="hdlist1"><code>debug</code></dt>
+<dd>
+<p>A boolean flag indicating if debug output should be
+generated. If the value is <code>True</code> and the <code>log</code> parameter isn&#8217;t
+<code>None</code> then the data sent to and received from the server will
+be written to the log. Be aware that user names and passwords will
+also be written, so handle it with care.</p>
+</dd>
+<dt class="hdlist1"><code>log</code></dt>
+<dd>
+<p>The logger where the log messages will be written.</p>
+</dd>
+<dt class="hdlist1"><code>kerberos</code></dt>
+<dd>
+<p>A boolean flag indicating if Kerberos
+authentication should be used instead of the default basic
+authentication.</p>
+</dd>
+<dt class="hdlist1"><code>timeout</code></dt>
+<dd>
+<p>The maximum total time to wait for the response, in
+seconds. A value of zero (the default) means wait for ever. If
+the timeout expires before the response is received an exception
+will be raised.</p>
+</dd>
+<dt class="hdlist1"><code>compress</code></dt>
+<dd>
+<p>A boolean flag indicating if the SDK should ask
+the server to send compressed responses. The default is <code>False</code>.
+Note that this is a hint for the server, and that it may return
+uncompressed data even when this parameter is set to <code>True</code>.</p>
+</dd>
+<dt class="hdlist1"><code>sso_url</code></dt>
+<dd>
+<p>A string containing the base SSO URL of the serve.
+Default SSO url is computed from the <code>url</code> if no <code>sso_url</code> is provided.</p>
+</dd>
+<dt class="hdlist1"><code>sso_revoke_url</code></dt>
+<dd>
+<p>A string containing the base URL of the SSO
+revoke service. This needs to be specified only when using
+an external authentication service. By default this URL
+is automatically calculated from the value of the <code>url</code> parameter,
+so that SSO token revoke will be performed using the SSO service
+that is part of the engine.</p>
+</dd>
+<dt class="hdlist1"><code>sso_token_name</code></dt>
+<dd>
+<p>The token name in the JSON SSO response returned
+from the SSO server. Default value is <code>access_token</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.authenticate">
+    <p>def <span class="ident">authenticate</span>(</p><p>self)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Return token which can be used for authentication instead of credentials.
+It will be created, if it not exists, yet. By default the token will be
+revoked when the connection is closed, unless the <code>logout</code> parameter of
+the <code>close</code> method is <code>False</code>.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.close">
+    <p>def <span class="ident">close</span>(</p><p>self, logout=True)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Releases the resources used by this connection.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>logout</code></dt>
+<dd>
+<p>A boolean, which specify if token should be revoked,
+and so user should be logged out.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.follow_link">
+    <p>def <span class="ident">follow_link</span>(</p><p>self, obj)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Follows the <code>href</code> attribute of this object, retrieves the object
+and returns it.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.is_link">
+    <p>def <span class="ident">is_link</span>(</p><p>self, obj)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Indicates if the given object is a link. An object is a link if
+it has an <code>href</code> attribute.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.send">
+    <p>def <span class="ident">send</span>(</p><p>self, request)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Sends an HTTP request and waits for the response.</p>
+</div>
+<div class="paragraph">
+<p>This method is intended for internal use by other components of the
+SDK. Refrain from using it directly, as backwards compatibility isn&#8217;t
+guaranteed.</p>
+</div>
+<div class="paragraph">
+<p>This method supports the following parameters.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>request</code></dt>
+<dd>
+<p>The Request object containing the details of the HTTP
+request to send.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The returned value is a Request object containing the details of the
+HTTP response received.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.service">
+    <p>def <span class="ident">service</span>(</p><p>self, path)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Returns a reference to the service corresponding to the given
+path. For example, if the <code>path</code> parameter is
+<code>vms/123/diskattachments</code> then it will return a reference to
+the service that manages the disk attachments for the virtual
+machine with identifier <code>123</code>.</p>
+</div>
+<div class="paragraph">
+<p>If there is no service corresponding to the given path an exception
+will be raised.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.system_service">
+    <p>def <span class="ident">system_service</span>(</p><p>self)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Returns the reference to the root of the services tree.</p>
+</div>
+<div class="paragraph">
+<p>The returned value is an instance of the <code>SystemService</code> class.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Connection.test">
+    <p>def <span class="ident">test</span>(</p><p>self, raise_exception=False)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Tests the connectivity with the server. If connectivity works
+correctly it returns <code>True</code>. If there is any connectivy problem
+it will either return <code>False</code> or raise an exception if the
+<code>raise_exception</code> parameter is <code>True</code>.</p>
+</div>
+</div>
+
+  </div>
+  
       </div>
       </div>
       
       <div class="item">
-      <p id="ovirtsdk4.xml.XmlWriter" class="name">class <span class="ident">XmlWriter</span></p>
+      <p id="ovirtsdk4.ConnectionBuilder" class="name">class <span class="ident">ConnectionBuilder</span></p>
       
   
     <div class="desc"><div class="paragraph">
-<p>This is an utility class used to generate XML documents using an streaming approach. It is intended for use by other components of the SDK. Refrain from using it directly, as backwards compatibility isn&#8217;t guaranteed.</p>
+<p>This class is a mechanism to simplify the repeated creation of
+multiple connections. It stores the connection parameters given
+in its constructor, and has a single <code>build</code> method that is
+equivalent to calling the constructor of the <code>Connection</code>
+class. Typical use will be like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="python"># Create the builder once:
+builder = ConnectionBuilder(
+    url='https://enginer40.example.com/ovirt-engine/api',
+    username='admin@internal',
+    password='redhat123',
+    ca_file='ca.pem',
+)
+
+# Create and use first connection:
+with builder.build() as connection:
+   ...
+
+# Create and use a second connection:
+with builder.build() as connection:
+   ...</code></pre>
+</div>
 </div>
 </div>
 
@@ -1121,12 +1497,234 @@ table {
       <div class="class">
           <h3>Ancestors (in MRO)</h3>
           <ul class="class_list">
-          <li><a href="#ovirtsdk4.xml.XmlWriter">XmlWriter</a></li>
+          <li><a href="#ovirtsdk4.ConnectionBuilder">ConnectionBuilder</a></li>
           <li>__builtin__.object</li>
           </ul>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.ConnectionBuilder.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, **kwargs)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Creates a new connection builder. The parameters are the same
+accepted by the constructor of the <code>Connnection</code> class.</p>
+</div>
+</div>
+
+  </div>
+  
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.ConnectionBuilder.build">
+    <p>def <span class="ident">build</span>(</p><p>self)</p>
+    </div>
+    
+
+    
+  
+    <div class="desc"><div class="paragraph">
+<p>Creates a new connection using the parameters passed to the
+constructor, and returns it.</p>
+</div>
+</div>
+
+  </div>
+  
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="ovirtsdk4.Error" class="name">class <span class="ident">Error</span></p>
+      
+  
+    <div class="desc"><div class="paragraph">
+<p>General exception which is thrown by SDK,
+indicates that some exception happened in SDK.</p>
+</div>
+</div>
+
+
+      <div class="class">
+          <h3>Ancestors (in MRO)</h3>
+          <ul class="class_list">
+          <li><a href="#ovirtsdk4.Error">Error</a></li>
+          <li>exceptions.Exception</li>
+          <li>exceptions.BaseException</li>
+          <li>__builtin__.object</li>
+          </ul>
+          <h3>Class variables</h3>
+            <div class="item">
+            <p id="ovirtsdk4.Error.args" class="name">var <span class="ident">args</span></p>
+            
+
+            
+  
+
+            </div>
+            <div class="item">
+            <p id="ovirtsdk4.Error.message" class="name">var <span class="ident">message</span></p>
+            
+
+            
+  
+
+            </div>
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="ovirtsdk4.List" class="name">class <span class="ident">List</span></p>
+      
+  
+    <div class="desc"><div class="paragraph">
+<p>This is the base class for all the list types of the SDK. It contains the
+utility methods used by all of them.</p>
+</div>
+</div>
+
+
+      <div class="class">
+          <h3>Ancestors (in MRO)</h3>
+          <ul class="class_list">
+          <li><a href="#ovirtsdk4.List">List</a></li>
+          <li>__builtin__.list</li>
+          <li>__builtin__.object</li>
+          </ul>
+          <h3>Instance variables</h3>
+            <div class="item">
+            <p id="ovirtsdk4.List.href" class="name">var <span class="ident">href</span></p>
+            
+
+            
+  
+    <div class="desc"><div class="paragraph">
+<p>Returns the value of the <code>href</code> attribute.</p>
+</div>
+</div>
+
+            </div>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.List.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, href=None)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
+      </div>
+      </div>
+      
+      <div class="item">
+      <p id="ovirtsdk4.Struct" class="name">class <span class="ident">Struct</span></p>
+      
+  
+    <div class="desc"><div class="paragraph">
+<p>This is the base class for all the struct types of the SDK. It contains
+the utility methods used by all of them.</p>
+</div>
+</div>
+
+
+      <div class="class">
+          <h3>Ancestors (in MRO)</h3>
+          <ul class="class_list">
+          <li><a href="#ovirtsdk4.Struct">Struct</a></li>
+          <li>__builtin__.object</li>
+          </ul>
+          <h3>Instance variables</h3>
+            <div class="item">
+            <p id="ovirtsdk4.Struct.href" class="name">var <span class="ident">href</span></p>
+            
+
+            
+  
+    <div class="desc"><div class="paragraph">
+<p>Returns the value of the <code>href</code> attribute.</p>
+</div>
+</div>
+
+            </div>
+          <h3>Methods</h3>
+            
+  <div class="item">
+    <div class="name def" id="ovirtsdk4.Struct.__init__">
+    <p>def <span class="ident">__init__</span>(</p><p>self, href=None)</p>
+    </div>
+    
+
+    
+  
+
+  </div>
+  
       </div>
       </div>
 
+    <h2 class="section-title" id="header-submodules">Sub-modules</h2>
+      <div class="item">
+      <p class="name"><a href="http.m.html">ovirtsdk4.http</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="reader.m.html">ovirtsdk4.reader</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="readers.m.html">ovirtsdk4.readers</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="service.m.html">ovirtsdk4.service</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="services.m.html">ovirtsdk4.services</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="types.m.html">ovirtsdk4.types</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="version.m.html">ovirtsdk4.version</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="writer.m.html">ovirtsdk4.writer</a></p>
+      
+  
+
+      </div>
+      <div class="item">
+      <p class="name"><a href="writers.m.html">ovirtsdk4.writers</a></p>
+      
+  
+
+      </div>
   </section>
 
     </article>

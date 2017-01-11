@@ -1,3 +1,0 @@
-= oVirt Python SDK documentation
-
-oVirt Python SDK documentation.
